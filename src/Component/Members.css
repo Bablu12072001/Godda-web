@@ -1,0 +1,17 @@
+/* Members.css */
+.tilt-card {
+  border: 1px solid #ccc;
+  transform: skewY(-5deg);
+  transition: transform 0.3s ease;
+/*  background-color: #f9f9f9; /* Added background color */
+background-color:#f9f9f9;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tilt-card:hover {
+  transform: skewY(0);
+}
+.description-container {
+  max-height: 15rem; 
+  overflow-y: auto;
+}

@@ -1,0 +1,28 @@
+@keyframes blink {
+  0% {
+    color: red;
+  }
+  20% {
+    color: orange;
+  }
+  40% {
+    color: orangered;
+  }
+  60% {
+    color: green;
+  }
+  80% {
+    color: blue;
+  }
+  100% {
+    color: purple;
+  }
+}
+
+.new {
+  animation: blink 1s infinite;
+  font-weight: bold;
+}
+.marquee:hover {
+  animation-play-state: paused;
+}
