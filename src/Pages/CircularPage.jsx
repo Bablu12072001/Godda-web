@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import Header from "../Component/AppBar";
 import Footer from "../Component/footer";
 import img from "../Assets/circularBg.jpg";
@@ -13,8 +13,8 @@ import Auth from "../Authentication";
 import { useNavigate } from "react-router-dom";
 
 export default function CircularPage() {
-const navigate = useNavigate();
-const { decoded } = Auth(); 
+  const navigate = useNavigate();
+  const { decoded } = Auth();
 
   useEffect(() => {
     if (!decoded) {
@@ -73,9 +73,7 @@ const { decoded } = Auth();
           </h1>
         </center>
       </div>
-      <div>
-        <Circular />
-      </div>
+      <div>{decoded ? <Circular /> : ""}</div>
       <div>
         <Footer />
       </div>
