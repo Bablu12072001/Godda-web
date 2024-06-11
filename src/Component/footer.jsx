@@ -9,6 +9,7 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 // import jharkhandLogo from './jharkhandLogo.png'; // Replace with the actual path to your logo
+import Logo from "../Assets/LogoBlank.png";
 
 const Footer = () => {
   return (
@@ -19,13 +20,10 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col gap-4 md:flex-row justify-between md:gap-8">
         <div className="text-center md:text-left md:mr-auto md:md:ml-10">
           <div className="flex flex-col items-center">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Jharkhand_Rajakiya_Chihna.svg/800px-Jharkhand_Rajakiya_Chihna.svg.png"
-              alt="Jharkhand Logo"
-              className="w-20 h-20 mr-2"
-            />
+            {/* <img src={Logo} alt="Jharkhand Logo" className="w-20 h-20 mr-2" /> */}
+            <div className="w-20 h-20 mr-2"></div>
             <h3 className="text-xl font-bold" style={{ color: "white" }}>
-              Jharkhand Ministrial Officer's Association (Collectorate Cadre)
+              Jharkhand State Non-Gazetted Employees Federation ,Godda
             </h3>
           </div>
         </div>
@@ -39,16 +37,16 @@ const Footer = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/leadership-team">About</Link>
             </li>
             <li>
-              <Link to="/become-member">Be a Member</Link>
+              <Link to="/be-a-member">Be a Member</Link>
             </li>
             <li>
               <Link to="/member-list">Member List</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact-us">Contact</Link>
             </li>
           </ul>
         </div>

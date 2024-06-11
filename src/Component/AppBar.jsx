@@ -90,7 +90,7 @@ const Header = (props) => {
             <>
               <Typography sx={{ fontSize: "1.5rem" }}>
                 {/* JMOA(Collectorate Cadre) */}
-                <img className="w-20 h-16" src={logo} alt="logo" />
+                {/* <img className="w-20 h-16" src={logo} alt="logo" /> */}
               </Typography>
               <DrawerComp />
             </>
@@ -99,12 +99,12 @@ const Header = (props) => {
               {isLogo ? (
                 <Typography sx={{ fontSize: "2rem" }}>
                   {/* JMOA(Collectorate Cadre) */}
-                  <img
+                  {/* <img
                     className="w-20 h-16"
                     src={logo}
                     alt="logo"
                     style={{ height: "9vh", width: "100%" }}
-                  />
+                  /> */}
                 </Typography>
               ) : (
                 ""

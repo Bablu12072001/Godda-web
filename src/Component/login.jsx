@@ -111,13 +111,13 @@ const Login = () => {
     }
   };
   const handleForgotPassword = () => {
-  navigate("/forgot-password");
+    navigate("/forgot-password");
   };
   return (
     <div className="flex justify-center items-center ">
       <div className="bg-white p-8 rounded-md shadow-lg w-96 space-y-8 h-auto">
         <h2 className="text-xl font-bold mb-4 text-center">
-          Jharkhand Ministrial Officer's Association (Collectorate Cadre)
+          Jharkhand State Non-Gazetted Employees Federation ,Godda
         </h2>
         <form onSubmit={handleLogin}>
           <div>
