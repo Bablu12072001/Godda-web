@@ -23,7 +23,7 @@ const Footer = () => {
             {/* <img src={Logo} alt="Jharkhand Logo" className="w-20 h-20 mr-2" /> */}
             <div className="w-20 h-20 mr-2"></div>
             <h3 className="text-xl font-bold" style={{ color: "white" }}>
-              Jharkhand State Non-Gazetted Employees Federation ,Godda
+              Jharkhand State Non-Gazetted Employees Federation, Godda
             </h3>
           </div>
         </div>

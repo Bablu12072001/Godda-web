@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Component/AppBar";
 import ImageComponent from "../Component/ImageComponent";
-import gallery from "../Assets/Blog.jpg";
+import gallery from "../Assets/Blog-image.jpg";
 import Footer from "../Component/footer";
 import { Breadcrumbs, Link, Typography, Stack } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";

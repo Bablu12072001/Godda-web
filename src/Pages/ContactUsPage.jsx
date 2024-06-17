@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "../Component/AppBar";
 import ImageComponent from "../Component/ImageComponent";
-import gallery from "../Assets/gallery.jpg";
+import gallery from "../Assets/contact-us.jpg";
 import Footer from "../Component/footer";
 import { Breadcrumbs, Link, Typography, Stack } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import ContactForm from '../Component/contactForm';
+import ContactForm from "../Component/contactForm";
 import { useNavigate } from "react-router-dom";
 export default function ContactUsPage() {
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ export default function ContactUsPage() {
     <Typography key="3" color="text.primary">
       Contact Us
     </Typography>,
- 
   ];
 
   return (
@@ -55,7 +54,7 @@ export default function ContactUsPage() {
       </div>
       <br />
       <div>
-    <ContactForm/>
+        <ContactForm />
       </div>
       <div>
         <Footer />

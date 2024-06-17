@@ -5,8 +5,8 @@ import ImageComponent from "../Component/ImageComponent";
 import { Breadcrumbs, Stack, Typography, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import BeAMemberForm from '../Component/BeaMember';
-import img from '../Assets/lt.jpg';
+import BeAMemberForm from "../Component/BeaMember";
+import img from "../Assets/Be-a-member.jpg";
 export default function BeAMemberPage() {
   const navigate = useNavigate();
   function handleClick(event, path) {
@@ -53,9 +53,9 @@ export default function BeAMemberPage() {
       </div>
       <br />
       <div>
-        <BeAMemberForm/>
+        <BeAMemberForm />
       </div>
-      <br/>
+      <br />
       <div>
         <Footer />
       </div>

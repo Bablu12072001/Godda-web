@@ -4,7 +4,7 @@ import ImageComponent from "../Component/ImageComponent";
 import { Breadcrumbs, Link, Typography, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import img from "../Assets/circularBg.jpg";
+import img from "../Assets/member-list.jpg";
 import DistrictList from "../Component/DistrictCard";
 import Footer from "../Component/footer";
 export default function MemberListPage() {
