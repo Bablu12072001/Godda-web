@@ -25,14 +25,15 @@ const Login = () => {
         email: username,
         password: password,
       });
+      console.log(res);
 
       if (
-        res.data["body-json"]["statusCode"] !== 200 ||
-        res.data["body-json"]["statusCode"] === undefined
+        res.data["statusCode"] !== 200 ||
+        res.data["statusCode"] === undefined
       ) {
         swal({
           title: "Error!",
-          text: "Error!!" + res.data["body-json"]["body"],
+          text: "Error!!" + res.data["body"],
           icon: "error",
           button: "Ok!",
         });
@@ -40,12 +41,9 @@ const Login = () => {
         setPassword("");
         setUsername("");
 
-        localStorage.setItem(
-          "loginToken",
-          res.data["body-json"]["body"]["tokens"]
-        );
+        localStorage.setItem("loginToken", res.data["body"]["tokens"]);
 
-        let token = res.data["body-json"]["body"]["tokens"];
+        let token = res.data["body"]["tokens"];
         let decoded;
         if (token) {
           try {

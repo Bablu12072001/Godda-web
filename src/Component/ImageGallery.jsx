@@ -37,8 +37,8 @@ export default function ImageGallery() {
         const res = await axios.get(`${apiUrl}/jmoa_galery_images_all_data`);
 
         if (
-          res.data["body-json"]["statusCode"] !== 200 ||
-          res.data["body-json"]["statusCode"] === undefined
+          res.data["statusCode"] !== 200 ||
+          res.data["statusCode"] === undefined
         ) {
           // setErr(true);
           setLoading(false);
@@ -51,16 +51,14 @@ export default function ImageGallery() {
         }
         // console.log(res);
 
-        if (
-          res.data["body-josn"] === "" ||
-          res.data["body-json"]["body"] === undefined
-        ) {
+        if (res.data === "" || res.data["body"] === undefined) {
           // console.log("Under if");
           // setErr(true);
           // setData([]);
         } else {
           // console.log("Under else");
-          setImages(res.data["body-json"]["body"]);
+          setImages(res.data["body"]);
+          console.log("This is images for gallery", setImages);
         }
         setLoading(false);
       } catch (error) {
