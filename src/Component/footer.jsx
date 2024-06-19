@@ -111,12 +111,6 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-          <h3
-            className="text-xl font-bold mb-4 mt-2"
-            style={{ color: "white" }}
-          >
-            +917903899768
-          </h3>
         </div>
       </div>
     </footer>
