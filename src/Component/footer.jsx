@@ -9,7 +9,7 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 // import jharkhandLogo from './jharkhandLogo.png'; // Replace with the actual path to your logo
-import Logo from "../Assets/LogoBlank.png";
+import Logo from "../Assets/jsngf-4.png";
 
 const Footer = () => {
   return (
@@ -20,8 +20,8 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col gap-4 md:flex-row justify-between md:gap-8">
         <div className="text-center md:text-left md:mr-auto md:md:ml-10">
           <div className="flex flex-col items-center">
-            {/* <img src={Logo} alt="Jharkhand Logo" className="w-20 h-20 mr-2" /> */}
-            <div className="w-20 h-20 mr-2"></div>
+            <img src={Logo} alt="Jharkhand Logo" className="w-28 h-28 mr-2" />
+            <div className="w-5 h-5 mr-2"></div>
             <h3 className="text-xl font-bold" style={{ color: "white" }}>
               Jharkhand State Non-Gazetted Employees Federation, Godda
             </h3>
