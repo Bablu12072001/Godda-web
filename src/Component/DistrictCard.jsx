@@ -87,13 +87,27 @@ const LeadershipTableList = () => {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Designation</TableCell>
-              <TableCell>Department</TableCell>
-              <TableCell>Joining Date</TableCell>
-              <TableCell>Employee Type</TableCell>
-              <TableCell>Last Six Digit Aadhar</TableCell>
-              <TableCell>Profile Image</TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Name
+              </TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Designation
+              </TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Department
+              </TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Joining Date
+              </TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Employee Type
+              </TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Last Six Digit Aadhar
+              </TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Profile Image
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

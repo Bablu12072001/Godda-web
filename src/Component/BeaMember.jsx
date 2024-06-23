@@ -225,15 +225,11 @@ function BeAMemberForm() {
           Be a Member
         </h1>
       </div>
-      <Box pt={6} pb={3}>
+      <Box sx={{ margin: 5 }} pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
               <Card>
-                <CardHeader
-                  title="Employee Add"
-                  titleTypographyProps={{ variant: "h6" }}
-                />
                 <Divider sx={{ margin: 0 }} />
                 <form onSubmit={handleSubmit}>
                   <CardContent>
@@ -540,21 +536,23 @@ function BeAMemberForm() {
                     </Grid>
                   </CardContent>
                   <Divider sx={{ margin: 0 }} />
-                  <CardActions>
+                  <CardActions sx={{ justifyContent: "center" }}>
                     <Button
-                      size="large"
+                      size="small" // Set the size to 'small'
                       type="submit"
                       sx={{
                         mt: 2,
-                        width: "100%",
+                        width: 80, // Set width to 20px
+                        height: 40, // Set height to 20px
                         color: "white",
+                        minWidth: "auto", // Remove minimum width
                       }}
                       variant="contained"
                       disabled={loading}
-                      style={{ color: "white" }}
+                      style={{ color: "white", minWidth: "auto" }} // Ensure minWidth is set to 'auto'
                     >
                       {loading ? (
-                        <CircularProgress size={24} color="inherit" />
+                        <CircularProgress size={20} color="inherit" /> // Adjust CircularProgress size to 20px
                       ) : (
                         "Submit"
                       )}
