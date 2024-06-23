@@ -3,7 +3,7 @@ import Header from "../Component/AppBar";
 import Footer from "../Component/footer";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
-import { Link, Stack, Grid,Card,CardContent } from "@mui/material";
+import { Link, Stack, Grid, Card, CardContent } from "@mui/material";
 import ImageComponent from "../Component/ImageComponent";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
@@ -16,35 +16,34 @@ export default function LeadershipTeamPage() {
     navigate(path);
   }
 
-   const MemberCard = ({ title, district }) => {
-     return (
-       <Grid item xs={12} sm={6}>
-         <Card
-           sx={{
-             margin: "10px",
-             backgroundColor: "#f0f0f0",
-             borderRadius: "12px",
-             overflow: "hidden",
-             cursor: "pointer",
-             transition: "box-shadow 0.3s",
-             "&:hover": {
-               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)", // Adjusted shadow color
-             },
-           }}
-           onClick={() => {
-             navigate(`/leadership-team/${title}`);
-           }}
-         >
-           <CardContent>
-             <Typography variant="h5" component="div" align="center">
-               {title}
-             </Typography>
-           </CardContent>
-         </Card>
-       </Grid>
-     );
-   };
-
+  const MemberCard = ({ title, district }) => {
+    return (
+      <Grid item xs={12} sm={6}>
+        <Card
+          sx={{
+            margin: "10px",
+            backgroundColor: "#f0f0f0",
+            borderRadius: "12px",
+            overflow: "hidden",
+            cursor: "pointer",
+            transition: "box-shadow 0.3s",
+            "&:hover": {
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)", // Adjusted shadow color
+            },
+          }}
+          onClick={() => {
+            navigate(`/leadership-team/${title}`);
+          }}
+        >
+          <CardContent>
+            <Typography variant="h5" component="div" align="center">
+              {title}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    );
+  };
 
   const breadcrumbs = [
     <Link
@@ -92,7 +91,7 @@ export default function LeadershipTeamPage() {
         <div>
           {/* <LeadershipTeam /> */}
           <Grid container spacing={3} justifyContent="center">
-            <MemberCard title="State Leadership Team"  />
+            <MemberCard title="State Leadership Team" />
             <MemberCard title="District Leadership Team" />
             <MemberCard title="Divisonal Leadership Team" />
           </Grid>

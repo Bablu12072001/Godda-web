@@ -1,132 +1,214 @@
+/**
+=========================================================
+* Material Dashboard 2 React - v2.2.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
+
+// @mui material components
 import React, { useState } from "react";
 import axios from "axios";
-import { apiUrl } from "../constants";
+import {
+  Card,
+  Grid,
+  Button,
+  Divider,
+  MenuItem,
+  TextField,
+  CardHeader,
+  Typography,
+  CardContent,
+  CardActions,
+  CircularProgress,
+  FormControlLabel,
+  Checkbox,
+  Box,
+} from "@mui/material";
 
-const BeAMemberForm = () => {
-  const [name, setName] = useState("");
+// Material Dashboard 2 React components
+// import MDBox from "components/MDBox";
+// import MDTypography from "components/MDTypography";
+// import { accessToken } from "../Authentication";
 
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
+// Import react-toastify components
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// Material Dashboard 2 React example components
 
-  const [dateOfJoining, setDateOfJoining] = useState("");
-  const [officeName, setOfficeName] = useState("");
-  const [department, setDepartment] = useState("");
-  const [officeLevel, setOfficeLevel] = useState("");
-  const [subdivision, setSubdivision] = useState("");
-  const [block, setBlock] = useState("");
-  const [aadharLastSix, setAadharLastSix] = useState("");
-  const [employeeType, setEmployeeType] = useState("");
-  const [parentalUnion, setParentalUnion] = useState("");
-  const [address, setAddress] = useState("");
-  const [yearlyFeeRemitted, setYearlyFeeRemitted] = useState(false);
-  const [photo, setPhoto] = useState(null);
-  const [signature, setSignature] = useState(null);
-  const [declaration, setDeclaration] = useState(false);
+function BeAMemberForm() {
+  const [loading, setLoading] = useState(false);
 
-  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
 
-  const handleInputChange = (e, setState) => {
-    const value = e.target.value;
-    setState(value);
-  };
+    creator_email: "raushansinghd2003@gmail.com",
+    creator_role: "admin",
 
-  const handleCheckboxChange = (e, setState) => {
-    setState(e.target.checked);
-  };
+    password: "admin@1234",
 
-  const handleFileChange = (e, setState) => {
-    setState(e.target.files[0]);
-  };
+    department: "",
+    designation: "",
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!name) newErrors.name = "Name is required";
+    joiningDate: "",
+    contactNumber: "",
+    address: {
+      village: "",
+      pincode: "",
+      city: "",
+      state: "",
+    },
+    email: "",
+    officeLevel: "",
+    officeName: "",
+    subDivision: "",
+    block: "",
+    lastSixDigitOfAadhar: "",
+    parentalUnion: "",
+    yearlyMemberFreeRemitted: "",
+    district: "",
+    employeeType: "",
 
-    if (!email) newErrors.email = "Email is required";
-    if (!contact) newErrors.contact = "Contact is required";
+    declaration: false,
+    sign: {
+      name: "",
+      base64: "",
+    },
+    image: {
+      name: "",
+      base64: "",
+    },
+  });
 
-    if (!dateOfJoining) newErrors.dateOfJoining = "Date of Joining is required";
-    if (!officeName) newErrors.officeName = "Office Name is required";
-    if (!department) newErrors.department = "Department is required";
-    if (!officeLevel) newErrors.officeLevel = "Office Level is required";
-    if (officeLevel === "subdivision" && !subdivision)
-      newErrors.subdivision = "Subdivision is required";
-    if (officeLevel === "block" && !block)
-      newErrors.block = "Block is required";
-    if (!aadharLastSix)
-      newErrors.aadharLastSix = "Aadhar last six digits are required";
-    if (!employeeType) newErrors.employeeType = "Employee Type is required";
-    if (!parentalUnion) newErrors.parentalUnion = "Parental Union  is required";
-    if (!address) newErrors.address = "Other Address is required";
-    if (!photo) newErrors.photo = "Photo is required";
-    if (!signature) newErrors.signature = "Signature is required";
-    if (!declaration)
-      newErrors.declaration = "You must agree to the declaration";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleEnquiry = async () => {
-    if (!validateForm()) return;
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-
-    formData.append("contact", contact);
-
-    formData.append("date_of_joining", dateOfJoining);
-    formData.append("office_name", officeName);
-    formData.append("department", department);
-    formData.append("office_level", officeLevel);
-    if (officeLevel === "subdivision")
-      formData.append("subdivision", subdivision);
-    if (officeLevel === "block") formData.append("block", block);
-    formData.append("aadhar_last_six", aadharLastSix);
-    formData.append("employee_type", employeeType);
-    formData.append("parental_union", parentalUnion);
-    formData.append("address", address);
-    formData.append("yearly_fee_remitted", yearlyFeeRemitted);
-    formData.append("photo", photo);
-    formData.append("signature", signature);
-
-    try {
-      const response = await axios.post(`${apiUrl}/jmoa_enquiry`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+  const handleInputChange = (prop) => (event) => {
+    if (prop.includes(".")) {
+      const [parentProp, childProp] = prop.split(".");
+      setFormData({
+        ...formData,
+        [parentProp]: {
+          ...formData[parentProp],
+          [childProp]: event.target.value,
         },
       });
-
-      console.log(response);
-      if (response.data["body-json"].statusCode === 200) {
-        setName("");
-        setEmail("");
-
-        setContact("");
-
-        setDateOfJoining("");
-        setOfficeName("");
-        setDepartment("");
-        setOfficeLevel("");
-        setSubdivision("");
-        setBlock("");
-        setAadharLastSix("");
-        setEmployeeType("");
-        setParentalUnion("");
-        setAddress("");
-        setYearlyFeeRemitted(false);
-        setPhoto(null);
-        setSignature(null);
-        setDeclaration(false);
-        setErrors({});
-      }
-    } catch (error) {
-      console.error("Error submitting enquiry:", error);
+    } else {
+      setFormData({
+        ...formData,
+        [prop]: event.target.value,
+      });
     }
   };
 
+  const handleFileInputChange = (prop) => (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({
+          ...formData,
+          [prop]: {
+            name: file.name,
+            base64: reader.result.split(",")[1], // Remove data url prefix
+          },
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      // Make the POST request using Axios
+      const response = await axios.post(
+        "https://vkfpe87plb.execute-api.ap-south-1.amazonaws.com/production/jmoa_employee_register",
+        formData
+      );
+
+      if (response.data["body-json"].statusCode === 200) {
+        toast.success(response.data["body-json"].body);
+        setFormData({
+          name: "",
+          creator_email: "raushansinghd2003@gmail.com",
+          creator_role: "admin",
+          password: "admin@1234",
+          department: "",
+          designation: "",
+          joiningDate: "",
+          contactNumber: "",
+          address: {
+            village: "",
+            pincode: "",
+            city: "",
+            state: "",
+          },
+          email: "",
+          officeLevel: "",
+          officeName: "",
+          subDivision: "",
+          block: "",
+          lastSixDigitOfAadhar: "",
+          parentalUnion: "",
+          yearlyMemberFreeRemitted: "",
+          district: "",
+          employeeType: "",
+          declaration: false,
+          sign: {
+            name: "",
+            base64: "",
+          },
+          image: {
+            name: "",
+            base64: "",
+          },
+        });
+      } else {
+        toast.error(response.data["body-json"].body);
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("Error:", error);
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      // Set loading to false after the API call is complete
+      setLoading(false);
+    }
+  };
+
+  // const handleOfficeLevelChange = (event) => {
+  //   const selectedOfficeLevel = event.target.value;
+  //   setFormData({
+  //     ...formData,
+  //     officeLevel: selectedOfficeLevel,
+  //     subDivision: "",
+  //     block: "",
+  //   });
+  // };
+  const handleOfficeLevelChange = (event) => {
+    const selectedOfficeLevel = event.target.value;
+    setFormData({
+      ...formData,
+      officeLevel: selectedOfficeLevel,
+      subDivision: "", // Reset subDivision when officeLevel changes
+      block: "",
+    });
+  };
+  const handleCheckboxChange = (e, setState) => {
+    setState(e.target.checked);
+  };
   return (
     <>
+      <ToastContainer />
+
       <div className="w-3/5 mx-auto mt-8 text-center">
         <h1 className="text-3xl font-bold mb-6 border-b-2 border-gray-500 pb-2 inline-block text-blue-900">
           Membership Benefits
@@ -142,276 +224,350 @@ const BeAMemberForm = () => {
         <h1 className="text-3xl font-bold mb-6 border-b-2 border-gray-500 pb-2 inline-block text-blue-900">
           Be a Member
         </h1>
-
-        <div className="flex flex-col md:flex-row md:space-x-6">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => handleInputChange(e, setName)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Name"
-            />
-            {errors.name && <p className="text-red-500">{errors.name}</p>}
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => handleInputChange(e, setEmail)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Email"
-            />
-            {errors.email && <p className="text-red-500">{errors.email}</p>}
-          </div>
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="text"
-              id="contact"
-              value={contact}
-              onChange={(e) => handleInputChange(e, setContact)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Mobile Number"
-            />
-            {errors.contact && <p className="text-red-500">{errors.contact}</p>}
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="text"
-              id="dateOfJoining"
-              value={dateOfJoining}
-              onChange={(e) => handleInputChange(e, setDateOfJoining)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Date of Joining"
-            />
-            {errors.dateOfJoining && (
-              <p className="text-red-500">{errors.dateOfJoining}</p>
-            )}
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="text"
-              id="officeName"
-              value={officeName}
-              onChange={(e) => handleInputChange(e, setOfficeName)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Office Name"
-            />
-            {errors.officeName && (
-              <p className="text-red-500">{errors.officeName}</p>
-            )}
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="text"
-              id="department"
-              value={department}
-              onChange={(e) => handleInputChange(e, setDepartment)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Department"
-            />
-            {errors.department && (
-              <p className="text-red-500">{errors.department}</p>
-            )}
-          </div>
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <select
-              id="officeLevel"
-              value={officeLevel}
-              onChange={(e) => handleInputChange(e, setOfficeLevel)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-            >
-              <option value="">Select Office Level</option>
-              <option value="district">District</option>
-              <option value="subdivision">Subdivision</option>
-              <option value="block">Block</option>
-            </select>
-            {errors.officeLevel && (
-              <p className="text-red-500">{errors.officeLevel}</p>
-            )}
-          </div>
-        </div>
-        {officeLevel === "subdivision" && (
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <select
-              id="subdivision"
-              value={subdivision}
-              onChange={(e) => handleInputChange(e, setSubdivision)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-            >
-              <option value="">Select Subdivision</option>
-              <option value="GODDA SADAR">GODDA SADAR</option>
-              <option value="MAHAGAMA">MAHAGAMA</option>
-            </select>
-            {errors.subdivision && (
-              <p className="text-red-500">{errors.subdivision}</p>
-            )}
-          </div>
-        )}
-        {officeLevel === "block" && (
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <select
-              id="block"
-              value={block}
-              onChange={(e) => handleInputChange(e, setBlock)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-            >
-              <option value="">Select Block</option>
-              <option value="BASANTRAI">BASANTRAI</option>
-              <option value="BOARIJORE">BOARIJORE</option>
-              <option value="GODDA">GODDA</option>
-              <option value="MAHAGAMA">MAHAGAMA</option>
-              <option value="MEHARMA">MEHARMA</option>
-              <option value="PATHERGAMA">PATHERGAMA</option>
-              <option value="PORAIYAHAT">PORAIYAHAT</option>
-              <option value="SUNDERPAHARI">SUNDERPAHARI</option>
-              <option value="THAKURGANGTI">THAKURGANGTI</option>
-            </select>
-            {errors.block && <p className="text-red-500">{errors.block}</p>}
-          </div>
-        )}
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="text"
-              id="aadharLastSix"
-              value={aadharLastSix}
-              onChange={(e) => handleInputChange(e, setAadharLastSix)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Aadhar Last 6 Digits"
-            />
-            {errors.aadharLastSix && (
-              <p className="text-red-500">{errors.aadharLastSix}</p>
-            )}
-          </div>
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <select
-              id="employeeType"
-              value={employeeType}
-              onChange={(e) => handleInputChange(e, setEmployeeType)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-            >
-              <option value="">Select Employee Type</option>
-              <option value="regular">REGULAR</option>
-              <option value="contractual">CONTRACTUAL</option>
-              <option value="outsourced">OUTSOURCED</option>
-              <option value="daily wasged">DAILY WAGED</option>
-            </select>
-            {errors.employeeType && (
-              <p className="text-red-500">{errors.employeeType}</p>
-            )}
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <input
-              type="text"
-              id="parentalUnion"
-              value={parentalUnion}
-              onChange={(e) => handleInputChange(e, setParentalUnion)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Parental Union "
-            />
-            {errors.parentalUnion && (
-              <p className="text-red-500">{errors.parentalUnion}</p>
-            )}
-          </div>
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <textarea
-              id="address"
-              value={address}
-              onChange={(e) => handleInputChange(e, setAddress)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Address"
-            ></textarea>
-            {errors.address && <p className="text-red-500">{errors.address}</p>}
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="yearlyFeeRemitted"
-              checked={yearlyFeeRemitted}
-              onChange={(e) => handleCheckboxChange(e, setYearlyFeeRemitted)}
-              className="form-checkbox h-5 w-5 text-blue-600"
-            />
-            <label
-              htmlFor="yearlyFeeRemitted"
-              className="ml-2 text-blue-900 font-bold"
-            >
-              Yearly member fee remitted?
-            </label>
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-6 mt-4">
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <label className="block text-blue-900 font-bold mb-2">
-              Upload Photo
-            </label>
-            <input
-              type="file"
-              id="photo"
-              accept="image/*"
-              onChange={(e) => handleFileChange(e, setPhoto)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-            />
-            {errors.photo && <p className="text-red-500">{errors.photo}</p>}
-          </div>
-          <div className="flex-1 mb-4 md:mb-0 relative">
-            <label className="block text-blue-900 font-bold mb-2">
-              Upload Signature
-            </label>
-            <input
-              type="file"
-              id="signature"
-              accept="image/*"
-              onChange={(e) => handleFileChange(e, setSignature)}
-              className="w-full p-2 border-b border-gray-500 rounded-md focus:outline-none focus:border-blue-500"
-            />
-            {errors.signature && (
-              <p className="text-red-500">{errors.signature}</p>
-            )}
-          </div>
-        </div>
-        <div className="flex items-center mt-4">
-          <input
-            type="checkbox"
-            id="declaration"
-            checked={declaration}
-            onChange={(e) => handleCheckboxChange(e, setDeclaration)}
-            className="form-checkbox h-5 w-5 text-blue-600"
-          />
-          <label htmlFor="declaration" className="ml-2 text-blue-900 font-bold">
-            I hereby declare that i will follow the terms and conditions of the
-            federation. i want to be a member of jharkhand state none-gazetted
-            employees federation, godda.
-          </label>
-        </div>
-        {errors.declaration && (
-          <p className="text-red-500">{errors.declaration}</p>
-        )}
-        <div className="mt-6">
-          <button
-            onClick={handleEnquiry}
-            className="bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-          >
-            Submit
-          </button>
-        </div>
       </div>
+      <Box pt={6} pb={3}>
+        <Grid container spacing={6}>
+          <Grid item xs={12}>
+            <Card>
+              <Card>
+                <CardHeader
+                  title="Employee Add"
+                  titleTypographyProps={{ variant: "h6" }}
+                />
+                <Divider sx={{ margin: 0 }} />
+                <form onSubmit={handleSubmit}>
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Name"
+                          placeholder="Name"
+                          value={formData.name}
+                          onChange={handleInputChange("name")}
+                          required
+                        />
+                      </Grid>
+
+                      {/* <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Creator Email"
+                          placeholder="Creator Email"
+                          value={formData.creator_email}
+                          onChange={handleInputChange("creator_email")}
+                          required
+                        />
+                      </Grid> */}
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Office Level"
+                          select
+                          value={formData.officeLevel}
+                          onChange={handleOfficeLevelChange}
+                          required
+                        >
+                          <MenuItem value="district">District</MenuItem>
+                          <MenuItem value="subDivision">Sub-Division</MenuItem>
+                          <MenuItem value="block">Block</MenuItem>
+                        </TextField>
+                      </Grid>
+
+                      {formData.officeLevel === "subDivision" && (
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            fullWidth
+                            label="Sub Division"
+                            select
+                            value={formData.subDivision}
+                            onChange={handleInputChange("subDivision")}
+                            required
+                          >
+                            <MenuItem value="godda sadar">Godda Sadar</MenuItem>
+                            <MenuItem value="mahagama">Mahagama</MenuItem>
+                          </TextField>
+                        </Grid>
+                      )}
+                      {formData.officeLevel === "block" && (
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            fullWidth
+                            label="Block"
+                            select
+                            value={formData.block}
+                            onChange={handleInputChange("block")}
+                            required
+                          >
+                            <MenuItem value="basantrai">Basantrai</MenuItem>
+                            <MenuItem value="boarijore">Boarijore</MenuItem>
+                            <MenuItem value="bodda">Godda</MenuItem>
+                            <MenuItem value="bahagama">Mahagama</MenuItem>
+                            <MenuItem value="beharma">Meharma</MenuItem>
+                            <MenuItem value="bathergama">Pathergama</MenuItem>
+                            <MenuItem value="boraiyahat">Poraiyahat</MenuItem>
+                            <MenuItem value="bunderpahari">
+                              Sunderpahari
+                            </MenuItem>
+                          </TextField>
+                        </Grid>
+                      )}
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Designation"
+                          placeholder="Designation"
+                          value={formData.designation}
+                          onChange={handleInputChange("designation")}
+                          required
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Joining Date"
+                          type="date"
+                          value={formData.joiningDate}
+                          onChange={handleInputChange("joiningDate")}
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Contact Number"
+                          placeholder="Contact Number"
+                          type="tel"
+                          value={formData.contactNumber}
+                          onChange={handleInputChange("contactNumber")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Department"
+                          placeholder="Department"
+                          value={formData.department}
+                          onChange={handleInputChange("department")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="District"
+                          placeholder="District"
+                          value={formData.district}
+                          onChange={handleInputChange("district")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Office Name"
+                          placeholder="Office Name"
+                          value={formData.officeName}
+                          onChange={handleInputChange("officeName")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                          Address
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Village"
+                          placeholder="Village"
+                          value={formData.address.village}
+                          onChange={handleInputChange("address.village")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Pincode"
+                          placeholder="Pincode"
+                          type="number"
+                          value={formData.address.pincode}
+                          onChange={handleInputChange("address.pincode")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="City"
+                          placeholder="City"
+                          value={formData.address.city}
+                          onChange={handleInputChange("address.city")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="State"
+                          placeholder="State"
+                          value={formData.address.state}
+                          onChange={handleInputChange("address.state")}
+                          required
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Last Six Digits of Aadhar"
+                          placeholder="Last Six Digits of Aadhar"
+                          value={formData.lastSixDigitOfAadhar}
+                          onChange={handleInputChange("lastSixDigitOfAadhar")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Parental Union"
+                          placeholder="Parental Union"
+                          value={formData.parentalUnion}
+                          onChange={handleInputChange("parentalUnion")}
+                          required
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Employee Type"
+                          select
+                          value={formData.employeeType}
+                          onChange={handleInputChange("employeeType")}
+                          required
+                        >
+                          <MenuItem value="regular">Regular</MenuItem>
+                          <MenuItem value="contractual">Contractual</MenuItem>
+                          <MenuItem value="outsourced">Outsourced</MenuItem>
+                          <MenuItem value="daily waged">Daily Waged</MenuItem>
+                        </TextField>
+                      </Grid>
+
+                      {/* <Grid item xs={12}>
+                        <FormControlLabel
+                          control={<Checkbox checked={formData.delcaration} onChange={handleInputChange("declaration")} />}
+                          label="Declaration"
+                        />
+                      </Grid> */}
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Email"
+                          placeholder="Email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange("email")}
+                          required
+                        />
+                      </Grid>
+
+                      <Grid item xs={12}>
+                        <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                          Upload Signature
+                        </Typography>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileInputChange("sign")}
+                          style={{ marginBottom: "10px" }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                          Upload Image
+                        </Typography>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileInputChange("image")}
+                          style={{ marginBottom: "10px" }}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        fullWidth
+                        label="Yearly Member Fee Remitted"
+                        select
+                        value={formData.yearlyMemberFreeRemitted}
+                        onChange={handleInputChange("yearlyMemberFreeRemitted")}
+                        required
+                      >
+                        <MenuItem value="yes">Yes</MenuItem>
+                        <MenuItem value="no">No</MenuItem>
+                      </TextField>
+                      <Typography></Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={formData.declaration}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                declaration: e.target.checked,
+                              })
+                            }
+                          />
+                        }
+                        label="Declaration"
+                      />
+                      <Typography>
+                        I hereby declare that i will follow the terms and
+                        conditions of the federation. i want to be a member of
+                        jharkhand state none-gazetted employees federation,
+                        godda.
+                      </Typography>
+                    </Grid>
+                  </CardContent>
+                  <Divider sx={{ margin: 0 }} />
+                  <CardActions>
+                    <Button
+                      size="large"
+                      type="submit"
+                      sx={{
+                        mt: 2,
+                        width: "100%",
+                        color: "white",
+                      }}
+                      variant="contained"
+                      disabled={loading}
+                      style={{ color: "white" }}
+                    >
+                      {loading ? (
+                        <CircularProgress size={24} color="inherit" />
+                      ) : (
+                        "Submit"
+                      )}
+                    </Button>
+                  </CardActions>
+                </form>
+              </Card>
+            </Card>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
-};
+}
 
 export default BeAMemberForm;

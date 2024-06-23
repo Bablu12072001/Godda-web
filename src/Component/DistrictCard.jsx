@@ -1,91 +1,132 @@
 import React, { useState, useEffect } from "react";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Skeleton from "@mui/material/Skeleton";
-import { useNavigate } from "react-router-dom";
-import { apiUrl } from "../constants";
+import {
+  TableContainer,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Paper,
+  CircularProgress,
+  TablePagination,
+  Typography,
+  Avatar,
+  styled,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const DistrictCard = ({ district, onClick }) => {
-  return (
-    <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Box
-        component={Card}
-        onClick={() => onClick(district)}
-        sx={{
-          cursor: "pointer",
-          margin: "10px",
-          borderRadius: "12px",
-          transition: "box-shadow 0.3s",
-          backgroundColor: "#f3f3f3",
-          "&:hover": {
-            boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.3)",
-          },
-        }}
-      >
-        <CardContent>
-          <Typography
-            variant="h6"
-            component="div"
-            align="center"
-            color="#652b7c"
-          >
-            {district}
-          </Typography>
-        </CardContent>
-      </Box>
-    </Grid>
-  );
-};
+const useStyles = styled((theme) => ({
+  container: {
+    margin: "20px auto",
+    maxWidth: "90%",
+    [theme.breakpoints.down("sm")]: {
+      margin: "10px auto",
+    },
+  },
+  table: {
+    minWidth: 650,
+    [theme.breakpoints.down("sm")]: {
+      minWidth: "100%",
+    },
+  },
+}));
 
-const DistrictList = () => {
+const LeadershipTableList = () => {
+  const classes = useStyles();
+  const theme = useTheme();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [districts, setDistricts] = useState([]);
+  const [employeeData, setEmployeeData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
-    const fetchDistricts = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/jmoa_district_all_data`);
-        setDistricts(response.data["body-json"]["body"]["Item"]["district"]);
-        setLoading(false);
+        setLoading(true);
+        const response = await axios.get(
+          "https://vkfpe87plb.execute-api.ap-south-1.amazonaws.com/production/jmoa_employee_all_data"
+        );
+        setEmployeeData(response.data["body-json"].body);
       } catch (error) {
-        console.error("Error fetching districts:", error);
+        console.error("Error fetching employee data:", error);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchDistricts();
+    fetchData();
   }, []);
 
-  const handleDistrictClick = (district) => {
-    navigate(`/member-list/${district}`);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const truncateString = (str, numWords) => {
+    const words = str.split(" ");
+    if (words.length > numWords) {
+      return words.slice(0, numWords).join(" ") + "...";
+    } else {
+      return str;
+    }
   };
 
   return (
-    <Grid container spacing={3} justifyContent="center">
-      {loading
-        ? // Display skeleton loading state while waiting for data
-          Array.from({ length: 15 }).map((_, index) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-              <Box sx={{ width: "100%", padding: "20px" }}>
-                <Skeleton variant="rectangular" height={100} />
-              </Box>
-            </Grid>
-          ))
-        : // Render district cards when data is available
-          districts.map((district, index) => (
-            <DistrictCard
-              key={index}
-              district={district}
-              onClick={handleDistrictClick}
-            />
-          ))}
-    </Grid>
+    <div>
+      {loading && <CircularProgress size={24} />}
+      <TableContainer component={Paper} className={classes.container}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Designation</TableCell>
+              <TableCell>Department</TableCell>
+              <TableCell>Joining Date</TableCell>
+              <TableCell>Employee Type</TableCell>
+              <TableCell>Last Six Digit Aadhar</TableCell>
+              <TableCell>Profile Image</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {employeeData
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.designation}</TableCell>
+                  <TableCell>{item.department}</TableCell>
+                  <TableCell>{item.joiningDate}</TableCell>
+                  <TableCell>{item.employeeType}</TableCell>
+                  <TableCell>{item.lastSixDigitOfAadhar}</TableCell>
+                  <TableCell>
+                    <Avatar alt="Profile" src={item.profile_image} />
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={employeeData.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </div>
   );
 };
 
-export default DistrictList;
+export default LeadershipTableList;
