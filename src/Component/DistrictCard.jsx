@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { accessToken } from "../service/variables";
 
 const useStyles = styled((theme) => ({
   container: {
@@ -48,8 +49,16 @@ const LeadershipTableList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "https://vkfpe87plb.execute-api.ap-south-1.amazonaws.com/production/jmoa_employee_all_data"
+        const response = await axios.post(
+          "https://vkfpe87plb.execute-api.ap-south-1.amazonaws.com/production/employee_by_verification_status",
+          {
+            isVerified: true, // Fetch all employees initially
+          },
+          {
+            headers: {
+              Authorization: accessToken(),
+            },
+          }
         );
         setEmployeeData(response.data["body-json"].body);
       } catch (error) {
@@ -81,7 +90,7 @@ const LeadershipTableList = () => {
   };
 
   return (
-    <div>
+    <div style={{ margin: 15 }}>
       {loading && <CircularProgress size={24} />}
       <TableContainer component={Paper} className={classes.container}>
         <Table className={classes.table}>
