@@ -52,7 +52,7 @@ function BeAMemberForm() {
     creator_email: "raushansinghd2003@gmail.com",
     creator_role: "admin",
 
-    password: "admin@1234",
+    password: "",
 
     department: "",
     designation: "",
@@ -140,7 +140,7 @@ function BeAMemberForm() {
           name: "",
           creator_email: "raushansinghd2003@gmail.com",
           creator_role: "admin",
-          password: "admin@1234",
+          password: "",
           department: "",
           designation: "",
           joiningDate: "",
@@ -241,6 +241,16 @@ function BeAMemberForm() {
                           placeholder="Name"
                           value={formData.name}
                           onChange={handleInputChange("name")}
+                          required
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Password"
+                          placeholder="Password"
+                          value={formData.password}
+                          onChange={handleInputChange("password")}
                           required
                         />
                       </Grid>

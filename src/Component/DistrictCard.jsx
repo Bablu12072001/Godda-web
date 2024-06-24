@@ -97,6 +97,9 @@ const LeadershipTableList = () => {
           <TableHead>
             <TableRow>
               <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
+                Member Id
+              </TableCell>
+              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
                 Name
               </TableCell>
               <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
@@ -124,6 +127,7 @@ const LeadershipTableList = () => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((item) => (
                 <TableRow key={item.id}>
+                  <TableCell>{item.employeeId}</TableCell>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.designation}</TableCell>
                   <TableCell>{item.department}</TableCell>
