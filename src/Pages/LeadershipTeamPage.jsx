@@ -93,7 +93,7 @@ export default function LeadershipTeamPage() {
           <Grid container spacing={3} justifyContent="center">
             <MemberCard title="State Leadership Team" />
             <MemberCard title="District Leadership Team" />
-            <MemberCard title="Divisonal Leadership Team" />
+            <MemberCard title="Block Leadership Team" />
           </Grid>
         </div>
         <br />
