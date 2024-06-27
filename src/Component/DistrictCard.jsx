@@ -102,23 +102,19 @@ const LeadershipTableList = () => {
               <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
                 Name
               </TableCell>
+
               <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
-                Designation
-              </TableCell>
-              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
-                Department
-              </TableCell>
-              <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
-                Joining Date
+                Office Name
               </TableCell>
               <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
                 Employee Type
               </TableCell>
+
               <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
-                Last Six Digit Aadhar
+                Email
               </TableCell>
               <TableCell style={{ fontWeight: "bold", fontSize: 20 }}>
-                Profile Image
+                Contact Number
               </TableCell>
             </TableRow>
           </TableHead>
@@ -129,14 +125,11 @@ const LeadershipTableList = () => {
                 <TableRow key={item.id}>
                   <TableCell>{item.employeeId}</TableCell>
                   <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.designation}</TableCell>
-                  <TableCell>{item.department}</TableCell>
-                  <TableCell>{item.joiningDate}</TableCell>
+                  <TableCell>{item.officeName}</TableCell>
+
                   <TableCell>{item.employeeType}</TableCell>
-                  <TableCell>{item.lastSixDigitOfAadhar}</TableCell>
-                  <TableCell>
-                    <Avatar alt="Profile" src={item.profile_image} />
-                  </TableCell>
+                  <TableCell>{item.email_id}</TableCell>
+                  <TableCell>{item.contactNumber}</TableCell>
                 </TableRow>
               ))}
           </TableBody>

@@ -316,6 +316,9 @@ function BeAMemberForm() {
                             <MenuItem value="bunderpahari">
                               Sunderpahari
                             </MenuItem>
+                            <MenuItem value="thakurgangti">
+                              THAKURGANGTI
+                            </MenuItem>
                           </TextField>
                         </Grid>
                       )}
@@ -352,7 +355,16 @@ function BeAMemberForm() {
                           value={formData.contactNumber}
                           onChange={handleInputChange("contactNumber")}
                           required
+                          inputProps={{
+                            pattern: "[6-9]{1}[0-9]{9}",
+                            title:
+                              "Contact number should start with a digit from 6 to 9 and have 10 digits in total",
+                            maxLength: 10,
+                          }}
                         />
+                        <Typography variant="body2" color="textSecondary">
+                          Format: 6-9XXXXXXXXX (e.g., 9876543210)
+                        </Typography>
                       </Grid>
                       <Grid item xs={12} sm={6}>
                         <TextField
@@ -439,7 +451,16 @@ function BeAMemberForm() {
                           value={formData.lastSixDigitOfAadhar}
                           onChange={handleInputChange("lastSixDigitOfAadhar")}
                           required
+                          inputProps={{
+                            pattern: "[0-9]{6}",
+                            title:
+                              "Aadhar number should be exactly Last 6 digits",
+                            maxLength: 6,
+                          }}
                         />
+                        <Typography variant="body2" color="textSecondary">
+                          Format: XXXXXX (e.g., 123456)
+                        </Typography>
                       </Grid>
                       <Grid item xs={12} sm={6}>
                         <TextField
@@ -485,6 +506,17 @@ function BeAMemberForm() {
                           required
                         />
                       </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                          Upload Profile Image
+                        </Typography>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileInputChange("image")}
+                          style={{ marginBottom: "10px" }}
+                        />
+                      </Grid>
 
                       <Grid item xs={12}>
                         <Typography variant="h6" sx={{ marginBottom: 1 }}>
@@ -494,17 +526,6 @@ function BeAMemberForm() {
                           type="file"
                           accept="image/*"
                           onChange={handleFileInputChange("sign")}
-                          style={{ marginBottom: "10px" }}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Typography variant="h6" sx={{ marginBottom: 1 }}>
-                          Upload Image
-                        </Typography>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleFileInputChange("image")}
                           style={{ marginBottom: "10px" }}
                         />
                       </Grid>
