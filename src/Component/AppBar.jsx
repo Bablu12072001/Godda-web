@@ -16,11 +16,10 @@ import {
   useTheme,
   styled,
 } from "@mui/material";
-
-// import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
 import DrawerComp from "./Drawer";
 import { useNavigate } from "react-router-dom";
 import ProfileSection from "./ProfileSection";
+
 const Header = (props) => {
   const navigate = useNavigate();
   const themes = createTheme({
@@ -40,26 +39,20 @@ const Header = (props) => {
     && {
       text-transform: capitalize; // Capitalize the first letter
       font-size: 18px; // Set the font size to your desired value
-      // font-family: "Roboto", sans-serif; // Set the font family to your desired value
       font-family: "Open Sans", sans-serif;
     }
   `;
 
   const [value, setValue] = useState(props.value);
-  // console.log(value);
   const theme = useTheme();
-  // console.log(theme);
   const isLogo = useMediaQuery("(min-width:1200px)");
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-  // console.log(isMatch);
   const { decoded } = Auth();
-  // console.log(decoded);
   const isTablet = useMediaQuery("(min-width:601px) and (max-width:960px)");
   let sp = "20px";
   if (isTablet) {
     sp = "4px";
   }
-  // console.log("sp", sp);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -68,10 +61,9 @@ const Header = (props) => {
     setValue(null);
   };
   const handleClose = () => {
-    // console.log("close");
-    // alert("close");
     setAnchorEl(null);
   };
+
   return (
     <React.Fragment>
       <AppBar
@@ -82,14 +74,10 @@ const Header = (props) => {
           color: "#000246e0",
         }}
       >
-        {/* {" 063970"} */}
-
         <Toolbar>
-          {/* <AddBusinessRoundedIcon sx={{ transform: "scale(2)" }} /> */}
           {isMatch ? (
             <>
               <Typography sx={{ fontSize: "1.5rem" }}>
-                {/* JMOA(Collectorate Cadre) */}
                 <img className="w-20 h-16" src={logo} alt="logo" />
               </Typography>
               <DrawerComp />
@@ -98,7 +86,6 @@ const Header = (props) => {
             <>
               {isLogo ? (
                 <Typography sx={{ fontSize: "2rem" }}>
-                  {/* JMOA(Collectorate Cadre) */}
                   <img
                     className="w-20 h-16"
                     src={logo}
@@ -185,18 +172,20 @@ const Header = (props) => {
                     Mission & Vision
                   </MenuItem>
                 </Menu>
-                <StyledTab
-                  label="Be A Member"
-                  onClick={() => {
-                    navigate("/be-a-member");
-                  }}
-                  sx={{
-                    marginRight: sp,
-                    color: "black",
-                    fontWeight: "900",
-                    borderBottom: value === 3 && "2px solid #000",
-                  }}
-                />
+                {!decoded?.role && (
+                  <StyledTab
+                    label="Be A Member"
+                    onClick={() => {
+                      navigate("/be-a-member");
+                    }}
+                    sx={{
+                      marginRight: sp,
+                      color: "black",
+                      fontWeight: "900",
+                      borderBottom: value === 3 && "2px solid #000",
+                    }}
+                  />
+                )}
                 <StyledTab
                   label="Member List"
                   onClick={() => {
@@ -254,16 +243,11 @@ const Header = (props) => {
                   Login
                 </Button>
               )}
-              {/* <Button sx={{ marginLeft: "10px" }} variant="contained">
-                SignUp
-              </Button> */}
-              {decoded?.role === "member" ? (
+              {decoded?.role === "member" && (
                 <>
                   &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                   <ProfileSection />
                 </>
-              ) : (
-                ""
               )}
             </>
           )}
