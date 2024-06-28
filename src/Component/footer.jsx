@@ -1,12 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"; // If using react-router for navigation
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Logo from "../Assets/jsngf-4.png";
 import LogoP5 from "../Assets/p51.png";
 
@@ -94,21 +89,12 @@ const Footer = () => {
                 +91 8002846416
               </a>
             </li>
+            <li>
+              Address: M.S Manzil, Eidgah Lane-1, <br /> Fasiyadangal, Godda,
+              Jharkhand - 814133
+            </li>
           </ul>
           <ul className="flex gap-4 justify-center md:justify-start">
-            {/* <li>
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon
-                  icon={faLinkedin}
-                  style={{ color: "#075ced" }}
-                  className="text-lg md:text-xl lg:text-2xl"
-                />
-              </a>
-            </li> */}
             <li>
               <a
                 href="https://x.com/jsngefgodda?t=Gjlwa0Rk-U_tWwjgZbvsYQ&s=08"
