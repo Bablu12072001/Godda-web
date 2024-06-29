@@ -317,7 +317,7 @@ function BeAMemberForm() {
                               Sunderpahari
                             </MenuItem>
                             <MenuItem value="thakurgangti">
-                              THAKURGANGTI
+                              Thakurgangti
                             </MenuItem>
                           </TextField>
                         </Grid>
@@ -465,8 +465,8 @@ function BeAMemberForm() {
                       <Grid item xs={12} sm={6}>
                         <TextField
                           fullWidth
-                          label="Parental Union"
-                          placeholder="Parental Union"
+                          label="Parent Union"
+                          placeholder="Parent Union"
                           value={formData.parentalUnion}
                           onChange={handleInputChange("parentalUnion")}
                           required
@@ -485,7 +485,7 @@ function BeAMemberForm() {
                           <MenuItem value="regular">Regular</MenuItem>
                           <MenuItem value="contractual">Contractual</MenuItem>
                           <MenuItem value="outsourced">Outsourced</MenuItem>
-                          <MenuItem value="daily waged">Daily Waged</MenuItem>
+                          <MenuItem value="daily waged">Daily wages</MenuItem>
                         </TextField>
                       </Grid>
 
