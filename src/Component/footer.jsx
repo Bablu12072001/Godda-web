@@ -17,13 +17,13 @@ const Footer = () => {
             <img src={Logo} alt="Jharkhand Logo" className="w-28 h-28 mr-2" />
             <div className="w-5 h-5 mr-2"></div>
             <h3 className="text-xl font-bold" style={{ color: "white" }}>
-              Jharkhand State Non-Gazetted Employees Federation, Godda
+              JSNGEF-G
             </h3>
           </div>
         </div>
 
         <div
-          className="text-center md:text-left md:mr-auto"
+          className="text-center md:text-left md:ml-auto"
           style={{ color: "white" }}
         >
           <ul>
@@ -62,6 +62,43 @@ const Footer = () => {
 
             <li>
               <Link to="/news-and-event"> News and Events</Link>
+            </li>
+          </ul>
+        </div>
+        <div className="text-center md:text-left md:ml-auto md:mr-10">
+          <h3 className="text-xl font-bold mb-4" style={{ color: "white" }}>
+            Important website Links
+          </h3>
+          <ul style={{ color: "white", marginTop: "10px" }}>
+            <li>
+              <a
+                href="https://finance.jharkhand.gov.in/"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Finance Department
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://jkuber.jharkhand.gov.in/emp/"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Employee portal
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://godda.nic.in/"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                About Godda
+              </a>
             </li>
           </ul>
         </div>

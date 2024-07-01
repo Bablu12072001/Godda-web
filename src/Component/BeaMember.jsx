@@ -76,6 +76,7 @@ function BeAMemberForm() {
     yearlyMemberFreeRemitted: "",
     district: "",
     employeeType: "",
+    transactionNo: "",
 
     declaration: false,
     sign: {
@@ -162,6 +163,7 @@ function BeAMemberForm() {
           yearlyMemberFreeRemitted: "",
           district: "",
           employeeType: "",
+          transactionNo: "",
           declaration: false,
           sign: {
             name: "",
@@ -184,6 +186,7 @@ function BeAMemberForm() {
       setLoading(false);
     }
   };
+  const isSubmitDisabled = !formData.transactionNo;
 
   // const handleOfficeLevelChange = (event) => {
   //   const selectedOfficeLevel = event.target.value;
@@ -211,7 +214,7 @@ function BeAMemberForm() {
       <ToastContainer />
 
       <div className="w-3/5 mx-auto mt-8 text-center">
-        <h1 className="text-3xl font-bold mb-6 border-b-2 border-gray-500 pb-2 inline-block text-blue-900">
+        {/* <h1 className="text-3xl font-bold mb-6 border-b-2 border-gray-500 pb-2 inline-block text-blue-900">
           Membership Benefits
         </h1>
         <p className="mt-4 mb-6 " style={{ color: "#454e81" }}>
@@ -220,7 +223,7 @@ function BeAMemberForm() {
           tempora! Totam omnis recusandae iure exercitationem qui ratione eius
           est aperiam eligendi, ab porro excepturi? Eligendi, accusantium
           asperiores eaque aliquid perferendis dignissimos unde velit alias
-        </p>
+        </p> */}
 
         <h1 className="text-3xl font-bold mb-6 border-b-2 border-gray-500 pb-2 inline-block text-blue-900">
           Be a Member
@@ -604,6 +607,16 @@ function BeAMemberForm() {
                       </TextField>
                       <Typography></Typography>
                     </Grid>
+                    <Grid item xs={12} sm={6} mt={4}>
+                      <TextField
+                        fullWidth
+                        label="Transaction/Ref no"
+                        placeholder="Transaction/Ref no"
+                        value={formData.transactionNo}
+                        onChange={handleInputChange("transactionNo")}
+                        required
+                      />
+                    </Grid>
                     <Grid item xs={12}>
                       <FormControlLabel
                         control={
@@ -630,21 +643,21 @@ function BeAMemberForm() {
                   <Divider sx={{ margin: 0 }} />
                   <CardActions sx={{ justifyContent: "center" }}>
                     <Button
-                      size="small" // Set the size to 'small'
+                      size="small"
                       type="submit"
                       sx={{
                         mt: 2,
-                        width: 80, // Set width to 20px
-                        height: 40, // Set height to 20px
+                        width: 80,
+                        height: 40,
                         color: "white",
-                        minWidth: "auto", // Remove minimum width
+                        minWidth: "auto",
                       }}
                       variant="contained"
-                      disabled={loading}
-                      style={{ color: "white", minWidth: "auto" }} // Ensure minWidth is set to 'auto'
+                      disabled={loading || isSubmitDisabled}
+                      style={{ color: "white", minWidth: "auto" }}
                     >
                       {loading ? (
-                        <CircularProgress size={20} color="inherit" /> // Adjust CircularProgress size to 20px
+                        <CircularProgress size={20} color="inherit" />
                       ) : (
                         "Submit"
                       )}
