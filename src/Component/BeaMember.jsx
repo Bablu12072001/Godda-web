@@ -634,7 +634,7 @@ function BeAMemberForm() {
                       />
                       <Typography>
                         I hereby declare that i will follow the terms and
-                        conditions of the federation. i want to be a member of
+                        conditions of the federation. I want to be a member of
                         jharkhand state none-gazetted employees federation,
                         godda.
                       </Typography>
