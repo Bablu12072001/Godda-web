@@ -77,7 +77,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Finance Department
+                Finance Jharkhand and Kuber jharkhand
               </a>
             </li>
             <li>
@@ -97,7 +97,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                About Godda
+                About Godda NIC
               </a>
             </li>
           </ul>
