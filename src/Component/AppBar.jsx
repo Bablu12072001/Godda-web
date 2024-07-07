@@ -186,18 +186,36 @@ const Header = (props) => {
                     }}
                   />
                 )}
-                <StyledTab
-                  label="Member List"
-                  onClick={() => {
-                    navigate("/member-list");
-                  }}
-                  sx={{
-                    marginRight: sp,
-                    color: "black",
-                    fontWeight: "900",
-                    borderBottom: value === 4 && "2px solid #000",
-                  }}
-                />
+
+                {decoded && (
+                  <StyledTab
+                    label="Member List"
+                    onClick={() => {
+                      navigate("/member-list");
+                    }}
+                    sx={{
+                      marginRight: sp,
+                      color: "black",
+                      fontWeight: "900",
+                      borderBottom: value === 4 && "2px solid #000",
+                    }}
+                  />
+                )}
+                {decoded && (
+                  <StyledTab
+                    label="Offices List"
+                    onClick={() => {
+                      navigate("/offices-list");
+                    }}
+                    sx={{
+                      marginRight: sp,
+                      color: "black",
+                      fontWeight: "900",
+                      borderBottom: value === 4 && "2px solid #000",
+                    }}
+                  />
+                )}
+
                 <StyledTab
                   label="Blog"
                   onClick={() => {
@@ -210,6 +228,7 @@ const Header = (props) => {
                     borderBottom: value === 5 && "2px solid #000",
                   }}
                 />
+
                 <StyledTab
                   label="Contact Us"
                   onClick={() => {

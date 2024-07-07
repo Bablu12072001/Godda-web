@@ -111,6 +111,10 @@ const Login = () => {
   const handleForgotPassword = () => {
     navigate("/forgot-password");
   };
+
+  const handleRegister = () => {
+    navigate("/be-a-member");
+  };
   return (
     <div className="flex justify-center items-center ">
       <div className="bg-white p-8 rounded-md shadow-lg w-96 space-y-8 h-auto">
@@ -191,6 +195,15 @@ const Login = () => {
             className="text-blue-500 hover:underline focus:outline-none"
           >
             Forgot Password?
+          </button>
+        </div>
+        <div className="text-center mt-4">
+          <span className="text-gray-600">New here? </span>
+          <button
+            onClick={handleRegister}
+            className="text-blue-500 hover:underline focus:outline-none"
+          >
+            Click here to Be a member!
           </button>
         </div>
       </div>

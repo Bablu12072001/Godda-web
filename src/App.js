@@ -22,6 +22,7 @@ import { apiUrl } from "./constants";
 import Auth from "./Authentication";
 import UserPortal from "./Pages/UserPortal";
 import MemberListPage from "./Pages/MemberListPage";
+import OfficesListPage from "./Pages/OfficesListPages";
 // import SelectMemberOption from './Pages/SelectMemberOption'
 import ShowMembers from "./Pages/ShowMembers";
 import ContactUsPage from "./Pages/ContactUsPage";
@@ -82,6 +83,7 @@ function App() {
         <Route path="/news-and-event" element={<NewsAndEventPage />} />
         <Route path="/news-and-event/:id" element={<NewsAndEventDetail />} />
         <Route path="/member-list" element={<MemberListPage />} />
+        <Route path="/offices-list" element={<OfficesListPage />} />
         <Route path="/member-list/:district" element={<ShowMembers />} />
         {/* <Route path="/member-list/:district/:option" element={<ShowMembers />} /> */}
         <Route path="/contact-us" element={<ContactUsPage />} />

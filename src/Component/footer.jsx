@@ -33,12 +33,12 @@ const Footer = () => {
             <li>
               <Link to="/leadership-team">About</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/be-a-member">Be a Member</Link>
             </li>
             <li>
               <Link to="/member-list">Member List</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/contact-us">Contact</Link>
             </li>
@@ -77,7 +77,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Finance Jharkhand and Kuber jharkhand
+                Finance Jharkhand
               </a>
             </li>
             <li>
@@ -87,7 +87,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Employee portal
+                Kuber jharkhand
               </a>
             </li>
             <li>

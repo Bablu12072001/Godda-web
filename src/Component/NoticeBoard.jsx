@@ -54,7 +54,7 @@ export default function NoticeBoard() {
         <div className="p-6">
           <center>
             <h1 className="text-3xl font-bold mb-4 border-b-2 border-gray-600 pb-2 inline-block text-blue-900">
-              Notice Board
+              Weekly Notice Board
             </h1>
           </center>
           <div className="max-h-64 overflow-y-auto">
