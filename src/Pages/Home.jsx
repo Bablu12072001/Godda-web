@@ -41,7 +41,7 @@ export default function Home() {
         <br />
         <LazyGloriousMoments />
         <br />
-        <LazyContactForm />
+        {/* <LazyContactForm /> */}
         <br />
 
         <LazyVisitorCounter className="mt-4" />

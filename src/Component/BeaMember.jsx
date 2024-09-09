@@ -311,12 +311,12 @@ function BeAMemberForm() {
                           >
                             <MenuItem value="basantrai">Basantrai</MenuItem>
                             <MenuItem value="boarijore">Boarijore</MenuItem>
-                            <MenuItem value="bodda">Godda</MenuItem>
-                            <MenuItem value="bahagama">Mahagama</MenuItem>
-                            <MenuItem value="beharma">Meharma</MenuItem>
-                            <MenuItem value="bathergama">Pathergama</MenuItem>
-                            <MenuItem value="boraiyahat">Poraiyahat</MenuItem>
-                            <MenuItem value="bunderpahari">
+                            <MenuItem value="godda">Godda</MenuItem>
+                            <MenuItem value="mahagama">Mahagama</MenuItem>
+                            <MenuItem value="meharma">Meharma</MenuItem>
+                            <MenuItem value="pathergama">Pathergama</MenuItem>
+                            <MenuItem value="poraiyahat">Poraiyahat</MenuItem>
+                            <MenuItem value="sunderpahari">
                               Sunderpahari
                             </MenuItem>
                             <MenuItem value="thakurgangti">

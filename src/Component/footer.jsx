@@ -100,6 +100,16 @@ const Footer = () => {
                 About Godda NIC
               </a>
             </li>
+            <li>
+              <a
+                href="https://www.wftucentral.org/general-secretary/"
+                style={{ color: "white", textDecoration: "none" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                World Federation of Trade Unions
+              </a>
+            </li>
           </ul>
         </div>
 
